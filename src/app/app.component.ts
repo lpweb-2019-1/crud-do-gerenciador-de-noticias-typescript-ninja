@@ -21,7 +21,7 @@ export class AppComponent {
   tags: string = null;
   editoria: string = null;
 
-  noticias = JSON.parse(localStorage.getItem("Noticias")) || [];
+  noticias = JSON.parse(localStorage.getItem("Noticias")) || [];//Caso o array esteja vazio ele busca na memoria do navegador.
 
   constructor() {
     this.noticias.map(

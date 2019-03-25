@@ -3,10 +3,9 @@ import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 
 import { AppComponent } from "./app.component";
-import { ListaDeNoticiasComponent } from "./lista-de-noticias/lista-de-noticias.component";
 
 @NgModule({
-  declarations: [AppComponent, ListaDeNoticiasComponent],
+  declarations: [AppComponent],
   imports: [BrowserModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent]
