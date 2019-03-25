@@ -1,0 +1,196 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h2>
+    Formulário para cadastrar ou editar uma noticia.
+  </h2>
+  <span *ngIf="this.alterando"
+    >Editando: <i> {{ this.alterando.titulo }}</i>
+  </span>
+</div>
+<!-- @Doc = [Containe de Notícias] -->
+<div class="containe-noticia">
+  <ul>
+    <li *ngFor="let noticia of noticias" id="noticia.id">
+      <p (click)="mostrar(noticia)">{{ noticia.titulo }}</p>
+      <p *ngIf="noticia.visivel">
+        {{ noticia.conteudo }}<br /><br />
+        <span>
+          <b>Categoria: </b>{{ noticia.categoria }} <b>Data:</b>
+          {{ noticia.data }} <b>Publicado:</b> {{ noticia.publicado }}
+          <b>Editoria:</b> {{ noticia.editoria }} <b>Tags:</b>
+          {{ noticia.tags }}
+        </span>
+      </p>
+      <span class="container-button-noticia" *ngIf="noticia.visivel">
+        <button
+          type="button"
+          class="btn btn-dark"
+          id="fechar"
+          (click)="fechar(noticia)"
+        >
+          Fechar
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          id="excluir"
+          (click)="isExcluir(noticia)"
+          id="excluir"
+        >
+          Excluir
+        </button>
+        <button
+          type="button"
+          class="btn btn-info"
+          id="alterar"
+          translate="yes"
+          (click)="alterar(noticia)"
+        >
+          Editar
+        </button>
+      </span>
+
+      <br />
+      <span *ngIf="noticia.excluido">
+        <button (click)="excluir(noticia.id)">
+          Confirmar
+        </button>
+        <button (click)="noticia.excluido = false">
+          Cancelar
+        </button>
+      </span>
+    </li>
+  </ul>
+</div>
+<!-- @Doc = [Formulário de cadastro ou edição de uma Notícia.] -->
+<div class="containe-formulario-noticia">
+  <form #cadastro="ngForm" (submit)="salvar()">
+    <div>
+      <label for="titulo">Titulo</label><br />
+      <textarea
+        name="titulo"
+        id="titulo"
+        cols="60"
+        rows="2"
+        [(ngModel)]="titulo"
+        placeholder="Flamengo vence na libertadores."
+        required
+      ></textarea>
+      <br />
+      <label for="conteudo">Conteúdo</label><br />
+      <textarea
+        name="Conteudo"
+        id="conteudo"
+        cols="60"
+        rows="5"
+        [(ngModel)]="conteudo"
+        required
+      ></textarea>
+      <br />
+
+      <aside
+        class="box info-noticia-detalhe"
+        style="display:flex; flex-direction: column"
+      >
+        <label for="data">Data</label>
+        <input
+          style="width: 160px; margin-top: 10px;"
+          type="date"
+          name="data"
+          [(ngModel)]="data"
+        />
+      </aside>
+      <aside class="box info-noticia-detalhe">
+        <span>
+          <label class="name-titulo" for="Publicada" title="Publicado">
+            Publicado? :
+          </label>
+          <label class="name-titulo" for="Sim" title="Sim"> Sim </label>
+          <input type="checkbox" name="Sim" title="Sim" /> <br />
+        </span>
+
+        <span>
+          <label class="name-titulo" for="Categoria" title="Categoria">
+            Tags :
+          </label>
+          <select
+            [(ngModel)]="tags"
+            multiple
+            name="tags"
+            id="tags"
+            title="tags"
+          >
+            <option value="Lazer">Lazer</option>
+            <option value="Esporte">Esporte</option>
+            <option value="Educação">Educação</option>
+            <option value="Politica">Politica</option>
+          </select>
+        </span>
+        <span>
+          <label class="name-titulo" for="Categoria" title="Categoria">
+            Categoria :
+          </label>
+          <select
+            [(ngModel)]="categoria"
+            name="categoria"
+            id="categoria"
+            title="categoria"
+          >
+            <option value="Lazer">Lazer</option>
+            <option value="Esporte">Esporte</option>
+            <option value="Educação">Educação</option>
+            <option value="Politica">Politica</option>
+          </select>
+        </span>
+        <span style="display: flex; flex-direction: column;">
+          Editoria
+          <span>
+            <section>
+              <input
+                [(ngModel)]="editoria"
+                value="Esporte"
+                type="radio"
+                name="Tags"
+              />
+              Esporte. <br />
+              <input
+                [(ngModel)]="editoria"
+                value="Politica"
+                type="radio"
+                name="Tags"
+              />
+              Politica. <br />
+              <input
+                [(ngModel)]="editoria"
+                value="Entreterimento"
+                type="radio"
+                name="Tags"
+                checked
+              />
+              Entreterimento. <br />
+              <input
+                [(ngModel)]="editoria"
+                value="Lazer"
+                type="radio"
+                name="Tags"
+              />
+              Lazer.
+            </section>
+          </span>
+        </span>
+      </aside>
+      <aside class="box-btn">
+        <button
+          type="submit"
+          class="btn btn-success"
+          [disabled]="!cadastro.valid"
+        >
+          Salvar
+        </button>
+        <button type="reset" class="btn btn-secondary" formnovalidate>
+          Limpar
+        </button>
+      </aside>
+    </div>
+  </form>
+</div>
